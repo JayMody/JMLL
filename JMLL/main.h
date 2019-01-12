@@ -7,3 +7,6 @@ std::string diff_time();
 std::string printmat(std::vector<std::vector<double>> a);
 std::vector<std::vector<double>> matmul(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2);
 std::vector<std::vector<double>> transpose(std::vector<std::vector<double>> a);
+std::vector<std::vector<double>> multiply(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2);
+std::vector<std::vector<double>> add(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2);
+std::vector<std::vector<double>> subtract(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2);

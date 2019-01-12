@@ -28,9 +28,18 @@ std::string printmat(std::vector<std::vector<double>> a)
 // Matrix Multiplication
 std::vector<std::vector<double>> matmul(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
 {
+    int ins;
+    if (a1[0].size() != a2.size())
+    {
+        throw "Error: Matrices shapes incompatible for matmul";
+    }
+    else
+    {
+        ins = (int) a1[0].size(); // number of elements in columns of a1 and rows of a2
+    }
+    
     int row = (int) a1.size(); // number of rows in output matrix
     int col = (int) a2[0].size(); // number of columns in output matrix
-    int ins = (int) a1[0].size(); // number of elements in columns of a1 and rows of a2
     
     // Return matrix
     std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
@@ -69,6 +78,83 @@ std::vector<std::vector<double>> transpose(std::vector<std::vector<double>> a)
         for (x = 0; x < col; x++)
         {
             mat[x][y] = a[y][x];
+        }
+    }
+    
+    return mat;
+}
+
+// Matrix operations
+std::vector<std::vector<double>> add(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
+{
+    int row, col;
+    if (a1.size() != a2.size() || a1[0].size() != a2[0].size())
+    {
+        throw "Error: Matrices shapes incompatible for elementary operations";
+    }
+    else
+    {
+        row = (int) a1.size();
+        col = (int) a1[0].size();
+    }
+    std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
+    
+    int y, x;
+    for (y = 0; y < row; y++)
+    {
+        for (x = 0; x < col; x++)
+        {
+            mat[y][x] = a1[y][x] + a2[y][x];
+        }
+    }
+    
+    return mat;
+}
+std::vector<std::vector<double>> subtract(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
+{
+    int row, col;
+    if (a1.size() != a2.size() || a1[0].size() != a2[0].size())
+    {
+        throw "Error: Matrices shapes incompatible for elementary operations";
+    }
+    else
+    {
+        row = (int) a1.size();
+        col = (int) a1[0].size();
+    }
+    std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
+    
+    int y, x;
+    for (y = 0; y < row; y++)
+    {
+        for (x = 0; x < col; x++)
+        {
+            mat[y][x] = a1[y][x] - a2[y][x];
+        }
+    }
+    
+    return mat;
+}
+std::vector<std::vector<double>> multiply(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
+{
+    int row, col;
+    if (a1.size() != a2.size() || a1[0].size() != a2[0].size())
+    {
+        throw "Error: Matrices shapes incompatible for elementary operations";
+    }
+    else
+    {
+        row = (int) a1.size();
+        col = (int) a1[0].size();
+    }
+    std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
+    
+    int y, x;
+    for (y = 0; y < row; y++)
+    {
+        for (x = 0; x < col; x++)
+        {
+            mat[y][x] = a1[y][x] * a2[y][x];
         }
     }
     
