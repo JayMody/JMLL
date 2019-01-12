@@ -25,12 +25,12 @@ std::string printmat(std::vector<std::vector<double>> a)
     return output;
 }
 
-//
+// Matrix Multiplication
 std::vector<std::vector<double>> matmul(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
 {
-    int row = a1.size(); // number of rows in output matrix
-    int col = a2[0].size(); // number of columns in output matrix
-    int ins = a1[0].size(); // number of elements in columns of a1 and rows of a2
+    int row = (int) a1.size(); // number of rows in output matrix
+    int col = (int) a2[0].size(); // number of columns in output matrix
+    int ins = (int) a1[0].size(); // number of elements in columns of a1 and rows of a2
     
     // Return matrix
     std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
@@ -54,3 +54,23 @@ std::vector<std::vector<double>> matmul(std::vector<std::vector<double>> a1, std
     
     return mat;
 };
+
+// Matrix Transpose
+std::vector<std::vector<double>> transpose(std::vector<std::vector<double>> a)
+{
+    int row = (int) a.size();
+    int col = (int) a[0].size();
+    
+    std::vector<std::vector<double>> mat(col, std::vector<double>(row, 0.0));
+    
+    int y, x;
+    for (y = 0; y < row; y++)
+    {
+        for (x = 0; x < col; x++)
+        {
+            mat[x][y] = a[y][x];
+        }
+    }
+    
+    return mat;
+}
