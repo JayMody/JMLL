@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C96A631B21E95DA800CC0C4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C96A631A21E95DA800CC0C4E /* main.cpp */; };
-		C96A632321E95F3900CC0C4E /* vec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C96A632121E95F3900CC0C4E /* vec.cpp */; };
+		C96A632321E95F3900CC0C4E /* mat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C96A632121E95F3900CC0C4E /* mat.cpp */; };
 		C96A632521E98F0800CC0C4E /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C96A632421E98F0800CC0C4E /* timer.cpp */; };
+		C9821CEA21EAEC0A006AF072 /* mlp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9821CE921EAEC0A006AF072 /* mlp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,9 +28,10 @@
 /* Begin PBXFileReference section */
 		C96A631721E95DA800CC0C4E /* JMLL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = JMLL; sourceTree = BUILT_PRODUCTS_DIR; };
 		C96A631A21E95DA800CC0C4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		C96A632121E95F3900CC0C4E /* vec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vec.cpp; sourceTree = "<group>"; };
+		C96A632121E95F3900CC0C4E /* mat.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mat.cpp; sourceTree = "<group>"; };
 		C96A632221E95F3900CC0C4E /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		C96A632421E98F0800CC0C4E /* timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
+		C9821CE921EAEC0A006AF072 /* mlp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mlp.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +65,10 @@
 			isa = PBXGroup;
 			children = (
 				C96A631A21E95DA800CC0C4E /* main.cpp */,
-				C96A632121E95F3900CC0C4E /* vec.cpp */,
+				C96A632121E95F3900CC0C4E /* mat.cpp */,
 				C96A632421E98F0800CC0C4E /* timer.cpp */,
 				C96A632221E95F3900CC0C4E /* main.h */,
+				C9821CE921EAEC0A006AF072 /* mlp.cpp */,
 			);
 			path = JMLL;
 			sourceTree = "<group>";
@@ -126,7 +129,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C96A632321E95F3900CC0C4E /* vec.cpp in Sources */,
+				C96A632321E95F3900CC0C4E /* mat.cpp in Sources */,
+				C9821CEA21EAEC0A006AF072 /* mlp.cpp in Sources */,
 				C96A631B21E95DA800CC0C4E /* main.cpp in Sources */,
 				C96A632521E98F0800CC0C4E /* timer.cpp in Sources */,
 			);
