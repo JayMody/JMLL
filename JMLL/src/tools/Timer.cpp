@@ -1,5 +1,8 @@
 #include <chrono>
 #include <string>
+
+#include "Timer.h"
+
 using namespace std::chrono;
 
 static auto start = high_resolution_clock::now();

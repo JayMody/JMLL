@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
-#include "main.h"
 
+#include "Matrix.h"
+#include "Tools.h"
+
+// TEMPORARY
 #include <typeinfo>
 
 //   Prints the given matrix   //
@@ -84,7 +87,24 @@ std::vector<std::vector<double>> transpose(std::vector<std::vector<double>> a)
     return mat;
 }
 
-// Matrix operations
+// Initializers
+std::vector<std::vector<double>> random_normal(int rows, int columns)
+{
+    std::vector<std::vector<double>> mat(rows, std::vector<double>(columns, 0.0));
+    
+    int y, x;
+    for (y = 0; y < rows; y++)
+    {
+        for (x = 0; x < columns; x++)
+        {
+            mat[y][x] = random(-1.0, 1.0);
+        }
+    }
+    
+    return mat;
+}
+
+// Matrix Operations
 std::vector<std::vector<double>> add(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
 {
     int row, col;
