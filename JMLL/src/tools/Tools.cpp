@@ -23,9 +23,13 @@ double random(double a, double b)
 }
 
 //   Activation Functions   //
+double linear(double x)
+{
+    return x;
+}
 double sigmoid(double x)
 {
-    return 1 / (1 + pow(M_E, -1 * x));
+    return 1.0 / (1.0 + pow(M_E, -1.0 * x));
 }
 double relu(double x)
 {
@@ -34,4 +38,10 @@ double relu(double x)
         return 0;
     }
     return x;
+}
+
+//   Loss Functions   //
+double squared_error(double x, double l)
+{
+    return pow(l - x, 2);
 }

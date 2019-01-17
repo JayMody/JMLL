@@ -104,6 +104,24 @@ std::vector<std::vector<double>> random_normal(int rows, int columns)
     return mat;
 }
 
+// General Operators
+std::vector<std::vector<double>> operate(std::vector<std::vector<double>> a, std::function<double(double)> f)
+{
+    int row = (int) a.size();
+    int col = (int) a[0].size();
+    
+    int y, x;
+    for (y = 0; y < row; y++)
+    {
+        for (x = 0; x < col; x++)
+        {
+            a[y][x] = f(a[y][x]);
+        }
+    }
+    
+    return a;
+}
+
 // Matrix Operations
 std::vector<std::vector<double>> add(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
 {

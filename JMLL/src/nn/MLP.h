@@ -50,6 +50,7 @@ public:
     
     //   MLP Functions    //
     std::vector<std::vector<double>> forward_prop(std::vector<double> X);
+    std::function<double(double)> activation_function(std::string activation);
     
 private:
     // Member Variables

@@ -3,6 +3,7 @@
 
 #include "MLP.h"
 #include "Matrix.h"
+#include "Tools.h"
 
 // Defualt Constructor
 MLP::MLP()
@@ -43,35 +44,63 @@ MLP::~MLP()
 }
 
 //   MLP Functions   //
+// Forward Propogation
 std::vector<std::vector<double>> MLP::forward_prop(std::vector<double> features)
 {
     std::vector<std::vector<double>> X = {features};
-    
+
     std::vector<std::vector<double>> logits = matmul(X, weights[0]);
-    
-    std::cout << "Weight  " << std::to_string(0) << std::endl;
-    std::cout << weights[0].size() << std::endl;
-    std::cout << weights[0][0].size() << std::endl << std::endl;
-    
+    logits = operate(logits, sigmoid(x));
+
+//    std::cout << "Weight  " << std::to_string(0) << std::endl;
+//    std::cout << weights[0].size() << std::endl;
+//    std::cout << weights[0][0].size() << std::endl << std::endl;
+
     int l;
     for (l = 1; l < weights.size(); l++)
     {
-        std::cout << logits.size() << std::endl;
-        std::cout << logits[0].size() << std::endl << std::endl;
+//        std::cout << logits.size() << std::endl;
+//        std::cout << logits[0].size() << std::endl << std::endl;
         logits = matmul(logits, weights[l]);
 
-        std::cout << "Weight  " << std::to_string(l) << std::endl;
-        std::cout << weights[l].size() << std::endl;
-        std::cout << weights[l][0].size() << std::endl << std::endl;
+//        std::cout << "Weight  " << std::to_string(l) << std::endl;
+//        std::cout << weights[l].size() << std::endl;
+//        std::cout << weights[l][0].size() << std::endl << std::endl;
     }
 
-    std::cout << logits.size() << std::endl;
-    std::cout << logits[0].size() << std::endl << std::endl;
-    
+//    std::cout << logits.size() << std::endl;
+//    std::cout << logits[0].size() << std::endl << std::endl;
+//
 //    std::vector<double> output = transpose(logits)[0];
 
     return logits;
 }
+
+
+// Activation Function
+std::function<double(double)> MLP::activation_function(std::string activation)
+{
+    if (activation == "sigmoid")
+    {
+        double (*p_sigmoid)(double);
+        p_sigmoid = &sigmoid;
+        
+        return sigmoid;
+    }
+    else if (activation == "relu")
+    {
+        double (*p_relu)(double);
+        p_relu = &relu;
+        
+        return relu;
+    }
+    
+    double (*p_linear)(double);
+    p_linear = &linear;
+    
+    return linear;
+}
+
 
 //   Accessor Functions   //
 int MLP::get_n_features(){
@@ -113,19 +142,3 @@ void MLP::set_activations(std::vector<std::string> iactivations){
 void MLP::set_weights(std::vector<std::vector<std::vector<double>>> iweights){
     weights = iweights;
 }
-
-////   Forward Propogation   //
-//std::vector<double> forward_prop(std::vector<double> x)
-//{
-//    std::vector<double> logits;
-//
-//    int l;
-//    for (l = 0; l < num_layers; l++)
-//    {
-//        weights[]
-//    }
-//
-//    return 0;
-//}
-
-
