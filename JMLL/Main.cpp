@@ -63,3 +63,10 @@ void network()
     
     std::cout << printmat(output) << std::endl;
 }
+
+
+
+void readFrom()
+{
+    
+}
