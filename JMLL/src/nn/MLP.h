@@ -49,7 +49,7 @@ public:
     void set_weights(std::vector<std::vector<std::vector<double>>> weights);
     
     //   MLP Functions    //
-    std::vector<std::vector<double>> forward_prop(std::vector<double> X);
+    std::vector<std::vector<double>> forward_prop(std::vector<std::vector<double>> X);
     std::function<double(double)> activation_function(std::string activation);
     
 private:

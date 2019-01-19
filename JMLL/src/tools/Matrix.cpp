@@ -6,6 +6,8 @@
 
 // TEMPORARY
 #include <typeinfo>
+#include <cmath>
+#include <cstdlib>
 
 //   Prints the given matrix   //
 std::string printmat(std::vector<std::vector<double>> a)
@@ -20,7 +22,7 @@ std::string printmat(std::vector<std::vector<double>> a)
         for (x = 0; x < a[0].size(); x++) // a[0].size() number of columns
         {
             std::string n = std::to_string(a[y][x]); // converts double value to string
-            output += n + " "; // appends number and space to the return string
+            output += n + ", "; // appends number and space to the return string
         }
         output += "\n"; // skip line after a row is finished being iterated
     }
@@ -116,6 +118,30 @@ std::vector<std::vector<double>> operate(std::vector<std::vector<double>> a, std
         for (x = 0; x < col; x++)
         {
             a[y][x] = f(a[y][x]);
+        }
+    }
+    
+    return a;
+}
+// General Operators
+std::vector<std::vector<double>> operate_bad(std::vector<std::vector<double>> a, std::string activation)
+{
+    int row = (int) a.size();
+    int col = (int) a[0].size();
+    
+    int y, x, n;
+    for (y = 0; y < row; y++)
+    {
+        for (x = 0; x < col; x++)
+        {
+            if (activation == "sigmoid")
+            {
+                a[y][x] = 1.0 / (1.0 + pow(M_E, -1.0 * a[y][x]));
+            }
+            else if (activation == "relu" and a[y][x] < 0)
+            {
+                a[y][x] = 0;
+            }
         }
     }
     

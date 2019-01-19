@@ -70,6 +70,8 @@
 		C96A631921E95DA800CC0C4E /* JMLL */ = {
 			isa = PBXGroup;
 			children = (
+				C96A631A21E95DA800CC0C4E /* Main.cpp */,
+				C96A632221E95F3900CC0C4E /* Main.h */,
 				C9821CF121EE7A74006AF072 /* src */,
 			);
 			path = JMLL;
@@ -78,8 +80,6 @@
 		C9821CF121EE7A74006AF072 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				C96A631A21E95DA800CC0C4E /* Main.cpp */,
-				C96A632221E95F3900CC0C4E /* Main.h */,
 				C9821CF321EE7A91006AF072 /* nn */,
 				C9821CF221EE7A83006AF072 /* tools */,
 			);

@@ -45,12 +45,12 @@ MLP::~MLP()
 
 //   MLP Functions   //
 // Forward Propogation
-std::vector<std::vector<double>> MLP::forward_prop(std::vector<double> features)
+std::vector<std::vector<double>> MLP::forward_prop(std::vector<std::vector<double>> features)
 {
-    std::vector<std::vector<double>> X = {features};
+    std::vector<std::vector<double>> X = features;
 
     std::vector<std::vector<double>> logits = matmul(X, weights[0]);
-    logits = operate(logits, sigmoid(x));
+    logits = operate_bad(logits, activations[0]);
 
 //    std::cout << "Weight  " << std::to_string(0) << std::endl;
 //    std::cout << weights[0].size() << std::endl;
@@ -62,6 +62,7 @@ std::vector<std::vector<double>> MLP::forward_prop(std::vector<double> features)
 //        std::cout << logits.size() << std::endl;
 //        std::cout << logits[0].size() << std::endl << std::endl;
         logits = matmul(logits, weights[l]);
+        logits = operate_bad(logits, activations[l]);
 
 //        std::cout << "Weight  " << std::to_string(l) << std::endl;
 //        std::cout << weights[l].size() << std::endl;
@@ -78,28 +79,28 @@ std::vector<std::vector<double>> MLP::forward_prop(std::vector<double> features)
 
 
 // Activation Function
-std::function<double(double)> MLP::activation_function(std::string activation)
-{
-    if (activation == "sigmoid")
-    {
-        double (*p_sigmoid)(double);
-        p_sigmoid = &sigmoid;
-        
-        return sigmoid;
-    }
-    else if (activation == "relu")
-    {
-        double (*p_relu)(double);
-        p_relu = &relu;
-        
-        return relu;
-    }
-    
-    double (*p_linear)(double);
-    p_linear = &linear;
-    
-    return linear;
-}
+//std::function<double()> MLP::activation_function(std::string activation)
+//{
+//    if (activation == "sigmoid")
+//    {
+//        double (*p_sigmoid)(double);
+//        p_sigmoid = &sigmoid;
+//        
+//        return sigmoid;
+//    }
+//    else if (activation == "relu")
+//    {
+//        double (*p_relu)(double);
+//        p_relu = &relu;
+//        
+//        return relu;
+//    }
+//    
+//    double (*p_linear)(double);
+//    p_linear = &linear;
+//    
+//    return linear;
+//}
 
 
 //   Accessor Functions   //

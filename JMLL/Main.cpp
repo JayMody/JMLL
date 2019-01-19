@@ -19,6 +19,7 @@ int main()
         
         // INSERT CODE HERE //
         
+        network();
         
         // END OF CODE //
         
@@ -49,16 +50,16 @@ void matrix_multiplication()
 
 void network()
 {
-    int n_f = 20;
-    int n_c = 3;
-    std::vector<int> nodes = {64, 64};
+    int n_f = 32;
+    int n_c = 10;
+    std::vector<int> nodes = {16, 16};
     std::vector<std::string> activations = {"sigmoid", "sigmoid", "sigmoid"};
 
     MLP my_network(n_f, n_c, nodes, activations);
 
     std::vector<std::vector<std::vector<double>>> a = my_network.get_weights();
-    std::vector<double> input_x = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+    std::vector<std::vector<double>> input_x = random_normal(1, n_f);
     std::vector<std::vector<double>> output = my_network.forward_prop(input_x);
-
+    
     std::cout << printmat(output) << std::endl;
 }
