@@ -3,10 +3,10 @@
 #include <chrono>
 
 #include "Main.h"
-#include "tools/Tools.h"
-#include "tools/Timer.h"
-#include "tools/Matrix.h"
-#include "nn/MLP.h"
+#include "src/tools/Tools.h"
+#include "src/tools/Timer.h"
+#include "src/tools/Matrix.h"
+#include "src/nn/MLP.h"
 
 void network();
 void matrix_multiplication();
@@ -19,7 +19,7 @@ int main()
         
         // INSERT CODE HERE //
         
-        network();
+        matrix_multiplication();
         
         // END OF CODE //
         
@@ -35,17 +35,37 @@ int main()
 
 void matrix_multiplication()
 {
-    std::vector<std::vector<double>> a1 = {{1, 0, -3, 3}, {-1, 3, 1, -1}};
-    std::vector<std::vector<double>> a2 = {{1, 0, 3}, {4, 4, -1}, {2, 3, 1}};
-    std::vector<std::vector<double>> c = {{1, 0}, {3, -2}, {2, -2}};
+    std::vector<std::vector<double>> a = {
+        {27,    7,    41,    -40},
+        {15,    49,    13,    23},
+        {3,    46,    24,    15},
+        {21,    -14,    -20,    -32},
+        {-49,    -27,    -42,    42}
+    };
+    std::vector<std::vector<double>> b = {
+        {-9,    7,    40,    -7},
+        {-30,    -41,    -20,    -20}
+    };
+    std::vector<std::vector<double>> c = {
+        {4,    4},
+        {31,    -23},
+        {-33,    -24},
+        {20,    -24},
+        {10,    45}
+    };
     
-    std::cout << "| a1 |\n" << printmat(a1) << std::endl;
-    std::cout << "| a2 |\n" << printmat(a2) << std::endl;
+    std::cout << "| AtCB |\n" << printmat(matmul(matmul(transpose(a), c), b)) << std::endl;
     
-    std::cout << "| a1 + a1 |\n" << printmat(add(a1, a1)) << std::endl;
-    std::cout << "| a1 - a1 |\n" << printmat(subtract(a1, a1)) << std::endl;
-    std::cout << "| a1 * a1 |\n" << printmat(multiply(a1, a1)) << std::endl;
-    std::cout << "| a1 matmul a1 |\n" << printmat(matmul(a1, a2)) << std::endl;
+    std::cout << "| A) |\n" << printmat(matmul(matmul(c, b), transpose(a))) << std::endl;
+    
+    std::cout << "| B) |\n" << printmat(matmul(matmul(a, transpose(b)), transpose(c))) << std::endl;
+    
+    std::cout << "| C) |\n" << printmat(matmul(matmul(transpose(a), c), b)) << std::endl;
+    
+    int m = 2436 + 90694 + 28194 - 40876 + 98745;
+    
+    std::cout << m << std::endl;
+    
 }
 
 void network()

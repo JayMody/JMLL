@@ -129,7 +129,7 @@ std::vector<std::vector<double>> operate_bad(std::vector<std::vector<double>> a,
     int row = (int) a.size();
     int col = (int) a[0].size();
     
-    int y, x, n;
+    int y, x;
     for (y = 0; y < row; y++)
     {
         for (x = 0; x < col; x++)
