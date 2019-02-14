@@ -50,8 +50,8 @@ std::vector<std::vector<double>> MLP::forward_prop(std::vector<std::vector<doubl
     std::vector<std::vector<double>> X = features;
 
     std::vector<std::vector<double>> logits = matmul(X, weights[0]);
-    logits = operate_bad(logits, activations[0]);
-
+    logits = operate(logits, call_activation(activations[0]));
+    
 //    std::cout << "Weight  " << std::to_string(0) << std::endl;
 //    std::cout << weights[0].size() << std::endl;
 //    std::cout << weights[0][0].size() << std::endl << std::endl;
@@ -62,7 +62,7 @@ std::vector<std::vector<double>> MLP::forward_prop(std::vector<std::vector<doubl
 //        std::cout << logits.size() << std::endl;
 //        std::cout << logits[0].size() << std::endl << std::endl;
         logits = matmul(logits, weights[l]);
-        logits = operate_bad(logits, activations[l]);
+        logits = operate(logits, call_activation(activations[l]));
 
 //        std::cout << "Weight  " << std::to_string(l) << std::endl;
 //        std::cout << weights[l].size() << std::endl;

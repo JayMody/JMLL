@@ -11,7 +11,6 @@
 void network();
 void matrix_multiplication();
 
-
 int main()
 {
     try {
@@ -19,7 +18,7 @@ int main()
         
         // INSERT CODE HERE //
         
-        matrix_multiplication();
+        network();
         
         // END OF CODE //
         
@@ -73,7 +72,7 @@ void network()
     int n_f = 32;
     int n_c = 10;
     std::vector<int> nodes = {16, 16};
-    std::vector<std::string> activations = {"sigmoid", "sigmoid", "sigmoid"};
+    std::vector<std::string> activations = {"sigmoid", "sigmoid"};
 
     MLP my_network(n_f, n_c, nodes, activations);
 

@@ -107,7 +107,7 @@ std::vector<std::vector<double>> random_normal(int rows, int columns)
 }
 
 // General Operators
-std::vector<std::vector<double>> operate(std::vector<std::vector<double>> a, std::function<double(double)> f)
+std::vector<std::vector<double>> operate(std::vector<std::vector<double>> a, activation_function f)
 {
     int row = (int) a.size();
     int col = (int) a[0].size();
@@ -117,31 +117,7 @@ std::vector<std::vector<double>> operate(std::vector<std::vector<double>> a, std
     {
         for (x = 0; x < col; x++)
         {
-            a[y][x] = f(a[y][x]);
-        }
-    }
-    
-    return a;
-}
-// General Operators
-std::vector<std::vector<double>> operate_bad(std::vector<std::vector<double>> a, std::string activation)
-{
-    int row = (int) a.size();
-    int col = (int) a[0].size();
-    
-    int y, x;
-    for (y = 0; y < row; y++)
-    {
-        for (x = 0; x < col; x++)
-        {
-            if (activation == "sigmoid")
-            {
-                a[y][x] = 1.0 / (1.0 + pow(M_E, -1.0 * a[y][x]));
-            }
-            else if (activation == "relu" and a[y][x] < 0)
-            {
-                a[y][x] = 0;
-            }
+            a[y][x] = (*f)(a[y][x]);
         }
     }
     

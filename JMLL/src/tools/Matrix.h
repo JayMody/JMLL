@@ -9,6 +9,8 @@
 #include <vector>
 #include <string>
 
+#include "Tools.h"
+
 #ifndef Matrix_h
 #define Matrix_h
 
@@ -23,8 +25,7 @@ std::vector<std::vector<double>> transpose(std::vector<std::vector<double>> a);
 std::vector<std::vector<double>> random_normal(int rows, int columns);
 
 // Function Operator
-std::vector<std::vector<double>> operate(std::vector<std::vector<double>> a, std::function<double()> f);
-std::vector<std::vector<double>> operate_bad(std::vector<std::vector<double>> a, std::string activation);
+std::vector<std::vector<double>> operate(std::vector<std::vector<double>> a, activation_function f);
 
 // Elementary Ops
 std::vector<std::vector<double>> multiply(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2);
