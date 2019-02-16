@@ -3,10 +3,10 @@
 #include <chrono>
 
 #include "Main.h"
-#include "src/tools/Tools.h"
-#include "src/tools/Timer.h"
-#include "src/tools/Matrix.h"
-#include "src/nn/MLP.h"
+#include "src/tools/Tools.hpp"
+#include "src/tools/Timer.hpp"
+#include "src/backend/Matrix.hpp"
+#include "src/nn/MLP.hpp"
 
 void network();
 void matrix_multiplication();
@@ -72,9 +72,9 @@ void network()
     int n_f = 32;
     int n_c = 10;
     std::vector<int> nodes = {16, 16};
-    std::vector<std::string> activations = {"sigmoid", "sigmoid"};
+    std::vector<std::string> activations = {"sigmoid", "sigmoid", "sigmoid"};
 
-    MLP my_network(n_f, n_c, nodes, activations);
+    MLP my_network(n_f, n_c, "squared_error", nodes, activations);
 
     std::vector<std::vector<std::vector<double>>> a = my_network.get_weights();
     std::vector<std::vector<double>> input_x = random_normal(1, n_f);

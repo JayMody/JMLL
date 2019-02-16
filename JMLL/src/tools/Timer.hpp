@@ -1,16 +1,10 @@
-//
-//  Timer.h
-//  JMLL
-//
-//  Created by Jay Mody on 2019-01-15.
-//  Copyright © 2019 Jay Mody. All rights reserved.
-//
-
+// Libraries
 #include <chrono>
 #include <string>
 
 using namespace std::chrono;
 
+////// Header //////
 #ifndef Timer_h
 #define Timer_h
 

@@ -1,27 +1,30 @@
+// Libraries
 #include <iostream>
 #include <vector>
 
-#include "Matrix.h"
-#include "Tools.h"
+// Headers
+#include "Matrix.hpp"
+#include "Tools.hpp"
 
-// TEMPORARY
-#include <typeinfo>
-#include <cmath>
-#include <cstdlib>
-
-//   Prints the given matrix   //
-std::string printmat(std::vector<std::vector<double>> a)
+// Print Matrix
+/**
+ * Returns a string representation of a matrix
+ *
+ * @param mat The input matrix
+ * @return String representation of mat
+ */
+std::string printmat(vec2d mat)
 {
     // Output string initialized
     std::string output = "";
     
     // Loop parameters
     int y, x;
-    for (y = 0; y < a.size(); y++)  // a.size() number or rows
+    for (y = 0; y < mat.size(); y++)  // a.size() number or rows
     {
-        for (x = 0; x < a[0].size(); x++) // a[0].size() number of columns
+        for (x = 0; x < mat[0].size(); x++) // a[0].size() number of columns
         {
-            std::string n = std::to_string(a[y][x]); // converts double value to string
+            std::string n = std::to_string(mat[y][x]); // converts double value to string
             output += n + ", "; // appends number and space to the return string
         }
         output += "\n"; // skip line after a row is finished being iterated
@@ -31,23 +34,30 @@ std::string printmat(std::vector<std::vector<double>> a)
 }
 
 // Matrix Multiplication
-std::vector<std::vector<double>> matmul(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
+/**
+ * Perform matrix multiplication between two matrices (mat1 * mat2) and returns the resulting matrix. The input matrices must be compatible, that is mat1 and mat2 are of shape (a * b) and (b * c).
+ *
+ * @param mat1 The first matrix.
+ * @param mat2 The second matrix
+ * @return String representation of mat
+ */
+vec2d matmul(vec2d mat1, vec2d mat2)
 {
     int ins;
-    if (a1[0].size() != a2.size())
+    if (mat1[0].size() != mat2.size())
     {
         throw "Error: Matrices shapes incompatible for matmul";
     }
     else
     {
-        ins = (int) a1[0].size(); // number of elements in columns of a1 and rows of a2
+        ins = (int) mat1[0].size(); // number of elements in columns of a1 and rows of a2
     }
     
-    int row = (int) a1.size(); // number of rows in output matrix
-    int col = (int) a2[0].size(); // number of columns in output matrix
+    int row = (int) mat1.size(); // number of rows in output matrix
+    int col = (int) mat2[0].size(); // number of columns in output matrix
     
     // Return matrix
-    std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
+    vec2d product_mat(row, std::vector<double>(col, 0.0));
     
     // Loop parameters
     double dot;
@@ -60,72 +70,70 @@ std::vector<std::vector<double>> matmul(std::vector<std::vector<double>> a1, std
             dot = 0; // Resets dot product for new entry in output matrix
             for (i = 0; i < ins; i++)
             {
-                dot += a1[y][i] * a2[i][x];
+                dot += mat1[y][i] * mat2[i][x];
             }
-            mat[y][x] = dot;
+            product_mat[y][x] = dot;
         }
     }
     
-    return mat;
+    return product_mat;
 };
 
 // Matrix Transpose
-std::vector<std::vector<double>> transpose(std::vector<std::vector<double>> a)
+/**
+ * Returns the input matrix transposed
+ *
+ * @param mat The input matrix.
+ * @return Transposed matrix
+ */
+vec2d transpose(vec2d mat)
 {
-    int row = (int) a.size();
-    int col = (int) a[0].size();
+    int row = (int) mat.size();
+    int col = (int) mat[0].size();
     
-    std::vector<std::vector<double>> mat(col, std::vector<double>(row, 0.0));
+    vec2d transposed_mat(col, std::vector<double>(row, 0.0));
     
     int y, x;
     for (y = 0; y < row; y++)
     {
         for (x = 0; x < col; x++)
         {
-            mat[x][y] = a[y][x];
+            transposed_mat[x][y] = mat[y][x];
         }
     }
     
-    return mat;
+    return transposed_mat;
 }
 
 // Initializers
-std::vector<std::vector<double>> random_normal(int rows, int columns)
+/**
+ * Generates a matrix with a random normal distribution
+ *
+ * @param rows Number of rows
+ * @param columns Number of columns
+ * @param lowerbound Lower bound of the distribution
+ * @param upperbound Upper bound of the distribution
+ *
+ * @return Matrix of shape (rows * columns) with random normal distribution
+ */
+vec2d random_normal(int rows, int columns, double lowerbound, double upperbound)
 {
-    std::vector<std::vector<double>> mat(rows, std::vector<double>(columns, 0.0));
+    vec2d mat(rows, std::vector<double>(columns, 0.0));
     
     int y, x;
     for (y = 0; y < rows; y++)
     {
         for (x = 0; x < columns; x++)
         {
-            mat[y][x] = random(-1.0, 1.0);
+            mat[y][x] = random(lowerbound, upperbound);
         }
     }
     
     return mat;
 }
 
-// General Operators
-std::vector<std::vector<double>> operate(std::vector<std::vector<double>> a, activation_function f)
-{
-    int row = (int) a.size();
-    int col = (int) a[0].size();
-    
-    int y, x;
-    for (y = 0; y < row; y++)
-    {
-        for (x = 0; x < col; x++)
-        {
-            a[y][x] = (*f)(a[y][x]);
-        }
-    }
-    
-    return a;
-}
-
 // Matrix Operations
-std::vector<std::vector<double>> add(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
+vec2d add(vec2d a1, vec2d a2)
 {
     int row, col;
     if (a1.size() != a2.size() || a1[0].size() != a2[0].size())
@@ -137,7 +145,7 @@ std::vector<std::vector<double>> add(std::vector<std::vector<double>> a1, std::v
         row = (int) a1.size();
         col = (int) a1[0].size();
     }
-    std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
+    vec2d mat(row, std::vector<double>(col, 0.0));
     
     int y, x;
     for (y = 0; y < row; y++)
@@ -150,7 +158,7 @@ std::vector<std::vector<double>> add(std::vector<std::vector<double>> a1, std::v
     
     return mat;
 }
-std::vector<std::vector<double>> subtract(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
+vec2d subtract(vec2d a1, vec2d a2)
 {
     int row, col;
     if (a1.size() != a2.size() || a1[0].size() != a2[0].size())
@@ -162,7 +170,7 @@ std::vector<std::vector<double>> subtract(std::vector<std::vector<double>> a1, s
         row = (int) a1.size();
         col = (int) a1[0].size();
     }
-    std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
+    vec2d mat(row, std::vector<double>(col, 0.0));
     
     int y, x;
     for (y = 0; y < row; y++)
@@ -175,7 +183,7 @@ std::vector<std::vector<double>> subtract(std::vector<std::vector<double>> a1, s
     
     return mat;
 }
-std::vector<std::vector<double>> multiply(std::vector<std::vector<double>> a1, std::vector<std::vector<double>> a2)
+vec2d multiply(vec2d a1, vec2d a2)
 {
     int row, col;
     if (a1.size() != a2.size() || a1[0].size() != a2[0].size())
@@ -187,7 +195,7 @@ std::vector<std::vector<double>> multiply(std::vector<std::vector<double>> a1, s
         row = (int) a1.size();
         col = (int) a1[0].size();
     }
-    std::vector<std::vector<double>> mat(row, std::vector<double>(col, 0.0));
+    vec2d mat(row, std::vector<double>(col, 0.0));
     
     int y, x;
     for (y = 0; y < row; y++)

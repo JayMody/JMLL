@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
 
-#include "MLP.h"
-#include "Matrix.h"
-#include "Tools.h"
+#include "MLP.hpp"
+#include "Activations.hpp"
+#include "Loss.hpp"
+#include "Matrix.hpp"
 
 // Defualt Constructor
 MLP::MLP()
@@ -13,6 +14,8 @@ MLP::MLP()
     n_layers = 0;
     n_classes = 0;
     
+    loss_func = "";
+    
     nodes = {};
     activations = {};
     
@@ -20,7 +23,7 @@ MLP::MLP()
 }
 
 // Overload Constructor
-MLP::MLP(int n_features, int n_classes, std::vector<int> nodes, std::vector<std::string> activations): n_features(n_features), n_classes(n_classes), nodes(nodes), activations(activations)
+MLP::MLP(int n_features, int n_classes, std::string loss_func, vec_int nodes, vec_string activations): n_features(n_features), n_classes(n_classes), loss_func(loss_func), nodes(nodes), activations(activations)
 {
     n_layers = (int) nodes.size();
     
@@ -45,7 +48,7 @@ MLP::~MLP()
 
 //   MLP Functions   //
 // Forward Propogation
-std::vector<std::vector<double>> MLP::forward_prop(std::vector<std::vector<double>> features)
+vec2d MLP::forward_prop(vec2d features)
 {
     std::vector<std::vector<double>> X = features;
 
@@ -78,31 +81,6 @@ std::vector<std::vector<double>> MLP::forward_prop(std::vector<std::vector<doubl
 }
 
 
-// Activation Function
-//std::function<double()> MLP::activation_function(std::string activation)
-//{
-//    if (activation == "sigmoid")
-//    {
-//        double (*p_sigmoid)(double);
-//        p_sigmoid = &sigmoid;
-//        
-//        return sigmoid;
-//    }
-//    else if (activation == "relu")
-//    {
-//        double (*p_relu)(double);
-//        p_relu = &relu;
-//        
-//        return relu;
-//    }
-//    
-//    double (*p_linear)(double);
-//    p_linear = &linear;
-//    
-//    return linear;
-//}
-
-
 //   Accessor Functions   //
 int MLP::get_n_features(){
     return n_features;
@@ -113,13 +91,13 @@ int MLP::get_n_layers(){
 int MLP::get_n_classes(){
     return n_classes;
 }
-std::vector<int> MLP::get_nodes(){
+vec_int MLP::get_nodes(){
     return nodes;
 }
-std::vector<std::string> MLP::get_activations(){
+vec_string MLP::get_activations(){
     return activations;
 }
-std::vector<std::vector<std::vector<double>>> MLP::get_weights(){
+vec3d MLP::get_weights(){
     return weights;
 }
 
@@ -134,12 +112,12 @@ void MLP::set_n_layers(int in_layers){
 void MLP::set_n_classes(int in_classes){
     n_classes = in_classes;
 }
-void MLP::set_nodes(std::vector<int> inodes){
+void MLP::set_nodes(vec_int inodes){
     nodes = inodes;
 }
-void MLP::set_activations(std::vector<std::string> iactivations){
+void MLP::set_activations(vec_string iactivations){
     activations = iactivations;
 }
-void MLP::set_weights(std::vector<std::vector<std::vector<double>>> iweights){
+void MLP::set_weights(vec3d iweights){
     weights = iweights;
 }

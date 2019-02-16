@@ -11,6 +11,8 @@
 #include <string>
 #include <vector>
 
+#include "Matrix.hpp"
+
 #ifndef MLP_h
 #define MLP_h
 
@@ -21,7 +23,7 @@ public:
     MLP();
     
     // Overload Constructor
-    MLP(int i_features, int i_classes, std::vector<int> i_nodes, std::vector<std::string> i_activations);
+    MLP(int i_features, int i_classes, std::string loss_func, vec_int i_nodes, vec_string i_activations);
     
     // Destructor
     ~MLP();
@@ -32,10 +34,10 @@ public:
     int get_n_layers();
     int get_n_classes();
     
-    std::vector<int> get_nodes();
-    std::vector<std::string> get_activations();
+    vec_int get_nodes();
+    vec_string get_activations();
     
-    std::vector<std::vector<std::vector<double>>> get_weights();
+    vec3d get_weights();
     
     
     //   Mutator Functions   //
@@ -43,14 +45,14 @@ public:
     void set_n_layers(int n_layers);
     void set_n_classes(int n_classes);
     
-    void set_nodes(std::vector<int> nodes);
-    void set_activations(std::vector<std::string> activations);
+    void set_nodes(vec_int nodes);
+    void set_activations(vec_string activations);
     
-    void set_weights(std::vector<std::vector<std::vector<double>>> weights);
+    void set_weights(vec3d weights);
     
     //   MLP Functions    //
-    std::vector<std::vector<double>> forward_prop(std::vector<std::vector<double>> X);
-    std::function<double(double)> activation_function(std::string activation);
+    vec2d forward_prop(vec2d X);
+    void SGD(vec1d predictions, vec1d targets);
     
 private:
     // Member Variables
@@ -58,10 +60,12 @@ private:
     int n_layers;
     int n_classes;
     
-    std::vector<int> nodes;
-    std::vector<std::string> activations;
+    std::string loss_func;
     
-    std::vector<std::vector<std::vector<double>>> weights;
+    vec_int nodes;
+    vec_string activations;
+    
+    vec3d weights;
 };
 
 #endif

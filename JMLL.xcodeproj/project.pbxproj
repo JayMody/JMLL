@@ -10,6 +10,8 @@
 		C96A631B21E95DA800CC0C4E /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C96A631A21E95DA800CC0C4E /* Main.cpp */; };
 		C96A632321E95F3900CC0C4E /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C96A632121E95F3900CC0C4E /* Matrix.cpp */; };
 		C96A632521E98F0800CC0C4E /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C96A632421E98F0800CC0C4E /* Timer.cpp */; };
+		C979326A221863EF00C55138 /* Activations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9793268221863EF00C55138 /* Activations.cpp */; };
+		C979326D2218643800C55138 /* Loss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C979326B2218643800C55138 /* Loss.cpp */; };
 		C9821CEA21EAEC0A006AF072 /* MLP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9821CE921EAEC0A006AF072 /* MLP.cpp */; };
 		C9821CED21EE78A2006AF072 /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9821CEC21EE78A2006AF072 /* Tools.cpp */; };
 /* End PBXBuildFile section */
@@ -32,12 +34,16 @@
 		C96A632121E95F3900CC0C4E /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		C96A632221E95F3900CC0C4E /* Main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Main.h; sourceTree = "<group>"; };
 		C96A632421E98F0800CC0C4E /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		C9793268221863EF00C55138 /* Activations.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Activations.cpp; path = JMLL/src/nn/Activations.cpp; sourceTree = SOURCE_ROOT; };
+		C9793269221863EF00C55138 /* Activations.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Activations.hpp; path = JMLL/src/nn/Activations.hpp; sourceTree = SOURCE_ROOT; };
+		C979326B2218643800C55138 /* Loss.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Loss.cpp; sourceTree = "<group>"; };
+		C979326C2218643800C55138 /* Loss.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Loss.hpp; sourceTree = "<group>"; };
 		C9821CE921EAEC0A006AF072 /* MLP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MLP.cpp; sourceTree = "<group>"; };
-		C9821CEB21EE6C93006AF072 /* MLP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLP.h; sourceTree = "<group>"; };
+		C9821CEB21EE6C93006AF072 /* MLP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MLP.hpp; sourceTree = "<group>"; };
 		C9821CEC21EE78A2006AF072 /* Tools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tools.cpp; sourceTree = "<group>"; };
-		C9821CEE21EE7919006AF072 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
-		C9821CEF21EE799A006AF072 /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
-		C9821CF021EE79A2006AF072 /* Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		C9821CEE21EE7919006AF072 /* Tools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tools.hpp; sourceTree = "<group>"; };
+		C9821CEF21EE799A006AF072 /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
+		C9821CF021EE79A2006AF072 /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +83,19 @@
 			path = JMLL;
 			sourceTree = "<group>";
 		};
+		C9793266221861F900C55138 /* backend */ = {
+			isa = PBXGroup;
+			children = (
+				C9821CEF21EE799A006AF072 /* Matrix.hpp */,
+				C96A632121E95F3900CC0C4E /* Matrix.cpp */,
+			);
+			path = backend;
+			sourceTree = "<group>";
+		};
 		C9821CF121EE7A74006AF072 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				C9793266221861F900C55138 /* backend */,
 				C9821CF321EE7A91006AF072 /* nn */,
 				C9821CF221EE7A83006AF072 /* tools */,
 			);
@@ -89,12 +105,10 @@
 		C9821CF221EE7A83006AF072 /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				C96A632121E95F3900CC0C4E /* Matrix.cpp */,
-				C9821CEF21EE799A006AF072 /* Matrix.h */,
+				C9821CF021EE79A2006AF072 /* Timer.hpp */,
 				C96A632421E98F0800CC0C4E /* Timer.cpp */,
-				C9821CF021EE79A2006AF072 /* Timer.h */,
+				C9821CEE21EE7919006AF072 /* Tools.hpp */,
 				C9821CEC21EE78A2006AF072 /* Tools.cpp */,
-				C9821CEE21EE7919006AF072 /* Tools.h */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -102,8 +116,12 @@
 		C9821CF321EE7A91006AF072 /* nn */ = {
 			isa = PBXGroup;
 			children = (
+				C9821CEB21EE6C93006AF072 /* MLP.hpp */,
 				C9821CE921EAEC0A006AF072 /* MLP.cpp */,
-				C9821CEB21EE6C93006AF072 /* MLP.h */,
+				C9793269221863EF00C55138 /* Activations.hpp */,
+				C9793268221863EF00C55138 /* Activations.cpp */,
+				C979326C2218643800C55138 /* Loss.hpp */,
+				C979326B2218643800C55138 /* Loss.cpp */,
 			);
 			path = nn;
 			sourceTree = "<group>";
@@ -165,8 +183,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96A632321E95F3900CC0C4E /* Matrix.cpp in Sources */,
+				C979326D2218643800C55138 /* Loss.cpp in Sources */,
 				C9821CED21EE78A2006AF072 /* Tools.cpp in Sources */,
 				C9821CEA21EAEC0A006AF072 /* MLP.cpp in Sources */,
+				C979326A221863EF00C55138 /* Activations.cpp in Sources */,
 				C96A631B21E95DA800CC0C4E /* Main.cpp in Sources */,
 				C96A632521E98F0800CC0C4E /* Timer.cpp in Sources */,
 			);
