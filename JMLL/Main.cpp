@@ -1,12 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <fstream>
 
 #include "Main.h"
 #include "src/tools/Tools.hpp"
 #include "src/tools/Timer.hpp"
 #include "src/backend/Matrix.hpp"
 #include "src/nn/MLP.hpp"
+#include "src/tools/CSVReader.hpp"
 
 void network();
 void matrix_multiplication();
@@ -69,16 +71,35 @@ void matrix_multiplication()
 
 void network()
 {
-    int n_f = 32;
-    int n_c = 10;
+//    token2d p = {{"1", "2"}, {"3", "4"}};
+//    std::cout << printmat(convert_to_double(p)) << std::endl;
+    
+    //// FILES ////
+    std::string xfilepath = "data/train_x.csv";
+    std::string yfilepath = "data/train_y.csv";
+
+    std::ifstream xfile (xfilepath);
+    std::ifstream yfile (yfilepath);
+
+    token2d xtext = readCSV(xfile);
+    token2d ytext = readCSV(yfile);
+
+    vec2d input_x = convert_to_double(xtext);
+    vec2d targets = convert_to_double(ytext);
+    ///////////////
+    
+    vec2d inp = {input_x[0]};
+    
+    int n_f = 2;
+    int n_c = 2;
     std::vector<int> nodes = {16, 16};
     std::vector<std::string> activations = {"sigmoid", "sigmoid", "sigmoid"};
 
     MLP my_network(n_f, n_c, "squared_error", nodes, activations);
 
     std::vector<std::vector<std::vector<double>>> a = my_network.get_weights();
-    std::vector<std::vector<double>> input_x = random_normal(1, n_f);
-    std::vector<std::vector<double>> output = my_network.forward_prop(input_x);
+//    std::vector<std::vector<double>> input_x = random_normal(1, n_f);
+    std::vector<std::vector<double>> output = my_network.forward_prop(inp);
     
     std::cout << printmat(output) << std::endl;
 }

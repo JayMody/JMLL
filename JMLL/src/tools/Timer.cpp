@@ -28,5 +28,5 @@ void stop_time()
  */
 std::string diff_time()
 {
-    return std::to_string(duration_cast<microseconds>(stop - start).count() / 1000);
+    return std::to_string(duration_cast<microseconds>(stop - start).count() / 1000.0);
 }

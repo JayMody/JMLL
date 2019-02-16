@@ -12,6 +12,7 @@
 		C96A632521E98F0800CC0C4E /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C96A632421E98F0800CC0C4E /* Timer.cpp */; };
 		C979326A221863EF00C55138 /* Activations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9793268221863EF00C55138 /* Activations.cpp */; };
 		C979326D2218643800C55138 /* Loss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C979326B2218643800C55138 /* Loss.cpp */; };
+		C9793270221895F400C55138 /* CSVReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C979326E221895F400C55138 /* CSVReader.cpp */; };
 		C9821CEA21EAEC0A006AF072 /* MLP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9821CE921EAEC0A006AF072 /* MLP.cpp */; };
 		C9821CED21EE78A2006AF072 /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9821CEC21EE78A2006AF072 /* Tools.cpp */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,8 @@
 		C9793269221863EF00C55138 /* Activations.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Activations.hpp; path = JMLL/src/nn/Activations.hpp; sourceTree = SOURCE_ROOT; };
 		C979326B2218643800C55138 /* Loss.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Loss.cpp; sourceTree = "<group>"; };
 		C979326C2218643800C55138 /* Loss.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Loss.hpp; sourceTree = "<group>"; };
+		C979326E221895F400C55138 /* CSVReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSVReader.cpp; sourceTree = "<group>"; };
+		C979326F221895F400C55138 /* CSVReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CSVReader.hpp; sourceTree = "<group>"; };
 		C9821CE921EAEC0A006AF072 /* MLP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MLP.cpp; sourceTree = "<group>"; };
 		C9821CEB21EE6C93006AF072 /* MLP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MLP.hpp; sourceTree = "<group>"; };
 		C9821CEC21EE78A2006AF072 /* Tools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tools.cpp; sourceTree = "<group>"; };
@@ -109,6 +112,8 @@
 				C96A632421E98F0800CC0C4E /* Timer.cpp */,
 				C9821CEE21EE7919006AF072 /* Tools.hpp */,
 				C9821CEC21EE78A2006AF072 /* Tools.cpp */,
+				C979326F221895F400C55138 /* CSVReader.hpp */,
+				C979326E221895F400C55138 /* CSVReader.cpp */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 				C9821CED21EE78A2006AF072 /* Tools.cpp in Sources */,
 				C9821CEA21EAEC0A006AF072 /* MLP.cpp in Sources */,
 				C979326A221863EF00C55138 /* Activations.cpp in Sources */,
+				C9793270221895F400C55138 /* CSVReader.cpp in Sources */,
 				C96A631B21E95DA800CC0C4E /* Main.cpp in Sources */,
 				C96A632521E98F0800CC0C4E /* Timer.cpp in Sources */,
 			);
