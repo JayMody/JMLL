@@ -13,6 +13,8 @@
 
 #include "Matrix.hpp"
 
+using namespace std;
+
 #ifndef MLP_h
 #define MLP_h
 
@@ -23,7 +25,7 @@ public:
     MLP();
     
     // Overload Constructor
-    MLP(int i_features, int i_classes, std::string loss_func, vec_int i_nodes, vec_string i_activations);
+    MLP(int i_features, int i_classes, vec_int i_nodes, vec_string i_activations);
     
     // Destructor
     ~MLP();
@@ -51,8 +53,8 @@ public:
     void set_weights(vec3d weights);
     
     //   MLP Functions    //
-    vec2d forward_prop(vec2d X);
-    void SGD(vec1d predictions, vec1d targets);
+    tuple<vec3d, vec3d> forward_prop(vec2d X);
+    vec3d SGD(vec3d logits, vec3d outputs, vec1d targets, string loss_func, double learning_rate);
     
 private:
     // Member Variables
@@ -60,7 +62,7 @@ private:
     int n_layers;
     int n_classes;
     
-    std::string loss_func;
+    string loss_func;
     
     vec_int nodes;
     vec_string activations;

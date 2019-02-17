@@ -10,8 +10,10 @@
 #include "src/nn/MLP.hpp"
 #include "src/tools/CSVReader.hpp"
 
+using namespace std;
+
 void network();
-void matrix_multiplication();
+int argmax(vec1d a);
 
 int main()
 {
@@ -20,93 +22,98 @@ int main()
         
         // INSERT CODE HERE //
         
+        srand(int(time(0)));
         network();
         
         // END OF CODE //
         
         stop_time();
-        std::cout << diff_time() << " ms\n";
+        cout << diff_time() << " ms\n";
         
     } catch (const char* msg) {
-        std::cerr << msg << std::endl;
+        cerr << msg << endl;
     }
     
     return 0;
 }
 
-void matrix_multiplication()
-{
-    std::vector<std::vector<double>> a = {
-        {27,    7,    41,    -40},
-        {15,    49,    13,    23},
-        {3,    46,    24,    15},
-        {21,    -14,    -20,    -32},
-        {-49,    -27,    -42,    42}
-    };
-    std::vector<std::vector<double>> b = {
-        {-9,    7,    40,    -7},
-        {-30,    -41,    -20,    -20}
-    };
-    std::vector<std::vector<double>> c = {
-        {4,    4},
-        {31,    -23},
-        {-33,    -24},
-        {20,    -24},
-        {10,    45}
-    };
-    
-    std::cout << "| AtCB |\n" << printmat(matmul(matmul(transpose(a), c), b)) << std::endl;
-    
-    std::cout << "| A) |\n" << printmat(matmul(matmul(c, b), transpose(a))) << std::endl;
-    
-    std::cout << "| B) |\n" << printmat(matmul(matmul(a, transpose(b)), transpose(c))) << std::endl;
-    
-    std::cout << "| C) |\n" << printmat(matmul(matmul(transpose(a), c), b)) << std::endl;
-    
-    int m = 2436 + 90694 + 28194 - 40876 + 98745;
-    
-    std::cout << m << std::endl;
-    
-}
-
 void network()
 {
-//    token2d p = {{"1", "2"}, {"3", "4"}};
-//    std::cout << printmat(convert_to_double(p)) << std::endl;
-    
-    //// FILES ////
-    std::string xfilepath = "data/train_x.csv";
-    std::string yfilepath = "data/train_y.csv";
+    //// Data Parsing ////
+    string xfilepath = "data/train_x.csv";
+    string yfilepath = "data/train_y.csv";
 
-    std::ifstream xfile (xfilepath);
-    std::ifstream yfile (yfilepath);
+    ifstream xfile (xfilepath);
+    ifstream yfile (yfilepath);
 
     token2d xtext = readCSV(xfile);
     token2d ytext = readCSV(yfile);
 
     vec2d input_x = convert_to_double(xtext);
     vec2d targets = convert_to_double(ytext);
-    ///////////////
+    //////////////////////
     
-    vec2d inp = {input_x[0]};
-    
+    //// Network Initialization ////
     int n_f = 2;
     int n_c = 2;
-    std::vector<int> nodes = {16, 16};
-    std::vector<std::string> activations = {"sigmoid", "sigmoid", "sigmoid"};
+    vec_int nodes = {32, 16, 16};
+    vec_string activations = {"linear", "relu", "relu", "sigmoid"};
 
-    MLP my_network(n_f, n_c, "squared_error", nodes, activations);
-
-    std::vector<std::vector<std::vector<double>>> a = my_network.get_weights();
-//    std::vector<std::vector<double>> input_x = random_normal(1, n_f);
-    std::vector<std::vector<double>> output = my_network.forward_prop(inp);
+    MLP my_network(n_f, n_c, nodes, activations);
+    ////////////////////////////////
     
-    std::cout << printmat(output) << std::endl;
+    //// Hyperparameters ////
+    int n_epochs = 10;
+    double lr = 0.1;
+    string loss = "squared_error";
+    /////////////////////////
+    
+    //// Training ////
+    vec3d delta_w(my_network.get_weights().size(), vector<vector<double>>(my_network.get_weights()[0].size(), vector<double>(my_network.get_weights()[0][0].size(), 0.0)));
+    
+    int correct = 0;
+    int total = 0;
+    vec3d logits, outputs;
+    vec1d predictions;
+    int pos;
+    int pos_t;
+    for (int epoch = 0; epoch < n_epochs; epoch++)
+    {
+        for (int i = 0; i < input_x.size(); i++)
+        {
+            tie(logits, outputs) = my_network.forward_prop({input_x[i]});
+//            my_network.SGD(logits, outputs, targets[i], loss, lr);
+            
+            predictions = outputs[outputs.size() -1][0];
+            pos = argmax(predictions);
+            pos_t = argmax(targets[i]);
+            
+//            cout << printmat({predictions});
+//            cout << pos << ", " << pos_t << endl;
+            
+            if (pos == pos_t)
+                correct++;
+            total++;
+        }
+        
+        cout << "Accuracy = " << to_string((double)correct / total) << endl;
+        
+    }
+    //////////////////
 }
 
 
-
-void readFrom()
+int argmax(vec1d a)
 {
+    int position = 0;
     
+    for (int i = 1; i < a.size(); i++)
+    {
+        if (a[i] > a[i-1])
+        {
+            position = i;
+        }
+    }
+    
+    return position;
 }

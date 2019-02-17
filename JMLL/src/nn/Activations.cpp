@@ -5,8 +5,10 @@
 // Headers
 #include "Activations.hpp"
 
+using namespace std;
+
 //   Activation Functions   //
-activation_function call_activation(std::string activation)
+activation_function call_activation(string activation)
 {
     for (int i = 0; i < act_names.size(); i++)
     {

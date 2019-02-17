@@ -1,3 +1,5 @@
+using namespace std;
+
 ////// Header //////
 #ifndef Loss_hpp
 #define Loss_hpp

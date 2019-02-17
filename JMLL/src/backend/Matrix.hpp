@@ -11,19 +11,21 @@
 
 #include "Tools.hpp"
 
+using namespace std;
+
 #ifndef Matrix_h
 #define Matrix_h
 
 // Type Definitions
-typedef std::vector<int> vec_int;
-typedef std::vector<std::string> vec_string;
+typedef vector<int> vec_int;
+typedef vector<string> vec_string;
 
-typedef std::vector<double> vec1d;
-typedef std::vector<std::vector<double>> vec2d;
-typedef std::vector<std::vector<std::vector<double>>> vec3d;
+typedef vector<double> vec1d;
+typedef vector<vector<double>> vec2d;
+typedef vector<vector<vector<double>>> vec3d;
 
 // Basics
-std::string printmat(vec2d a);
+string printmat(vec2d a);
 
 // Arithemetic
 vec2d matmul(vec2d a1, vec2d a2);
@@ -36,5 +38,10 @@ vec2d random_normal(int rows, int columns, double lowerbound = -1.0, double uppe
 vec2d multiply(vec2d a1, vec2d a2);
 vec2d add(vec2d a1, vec2d a2);
 vec2d subtract(vec2d a1, vec2d a2);
+
+vec2d bump(vec2d a, double x);
+vec2d scale(vec2d a, double x);
+
+string get_shape(vec2d mat);
 
 #endif /* Matrix_h */

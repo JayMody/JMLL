@@ -4,6 +4,7 @@
 // Headesr
 #include "Tools.hpp"
 
+using namespace std;
 
 //   Tools   //
 double random(double a, double b)

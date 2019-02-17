@@ -5,7 +5,8 @@
 // Headers
 #include "Timer.hpp"
 
-using namespace std::chrono;
+using namespace chrono;
+using namespace std;
 
 static auto start = high_resolution_clock::now();
 static auto stop = high_resolution_clock::now();
@@ -26,7 +27,7 @@ void stop_time()
  *
  * @return String of the time passed in milliseconds
  */
-std::string diff_time()
+string diff_time()
 {
-    return std::to_string(duration_cast<microseconds>(stop - start).count() / 1000.0);
+    return to_string(duration_cast<microseconds>(stop - start).count() / 1000.0);
 }

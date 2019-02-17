@@ -3,7 +3,9 @@
 #include "CSVReader.hpp"
 #include "Matrix.hpp"
 
-token1d readRow(std::string &row)
+using namespace std;
+
+token1d readRow(string &row)
 {
     token1d fields = {""};
     int i = 0;
@@ -27,14 +29,14 @@ token1d readRow(std::string &row)
 
 #include <iostream>
 
-token2d readCSV(std::ifstream &in)
+token2d readCSV(ifstream &in)
 {
     token2d table;
-    std::string row;
+    string row;
     
     while (!in.eof())
     {
-        std::getline(in, row);
+        getline(in, row);
         if (!in.good())
         {
             break;
@@ -55,9 +57,9 @@ vec2d convert_to_double(token2d text)
     {
         mat.push_back({});
         
-        for (std::string num : line)
+        for (string num : line)
         {
-            mat[i].push_back(std::stoi(num));
+            mat[i].push_back(stoi(num));
         }
         
         i++;

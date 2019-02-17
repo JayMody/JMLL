@@ -2,6 +2,7 @@
 #include <chrono>
 #include <string>
 
+using namespace std;
 using namespace std::chrono;
 
 ////// Header //////
@@ -10,6 +11,6 @@ using namespace std::chrono;
 
 void start_time();
 void stop_time();
-std::string diff_time();
+string diff_time();
 
 #endif /* Timer_h */

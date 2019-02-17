@@ -1,10 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <tuple>
 
 #include "MLP.hpp"
 #include "Activations.hpp"
 #include "Loss.hpp"
 #include "Matrix.hpp"
+
+using namespace std;
 
 // Defualt Constructor
 MLP::MLP()
@@ -23,7 +26,7 @@ MLP::MLP()
 }
 
 // Overload Constructor
-MLP::MLP(int n_features, int n_classes, std::string loss_func, vec_int nodes, vec_string activations): n_features(n_features), n_classes(n_classes), loss_func(loss_func), nodes(nodes), activations(activations)
+MLP::MLP(int n_features, int n_classes, vec_int nodes, vec_string activations): n_features(n_features), n_classes(n_classes), nodes(nodes), activations(activations)
 {
     n_layers = (int) nodes.size();
     
@@ -48,36 +51,74 @@ MLP::~MLP()
 
 //   MLP Functions   //
 // Forward Propogation
-vec2d MLP::forward_prop(vec2d features)
+tuple<vec3d, vec3d> MLP::forward_prop(vec2d X)
 {
-    std::vector<std::vector<double>> X = features;
-
-    std::vector<std::vector<double>> logits = matmul(X, weights[0]);
-    logits = operate(logits, call_activation(activations[0]));
+    vec3d logits = {};
+    vec3d outputs = {};
     
-//    std::cout << "Weight  " << std::to_string(0) << std::endl;
-//    std::cout << weights[0].size() << std::endl;
-//    std::cout << weights[0][0].size() << std::endl << std::endl;
+    logits.push_back(matmul(X, weights[0]));
+    outputs.push_back(operate(logits[0], call_activation(activations[0])));
 
     int l;
     for (l = 1; l < weights.size(); l++)
     {
-//        std::cout << logits.size() << std::endl;
-//        std::cout << logits[0].size() << std::endl << std::endl;
-        logits = matmul(logits, weights[l]);
-        logits = operate(logits, call_activation(activations[l]));
+        logits.push_back(matmul(outputs[l-1], weights[l]));
+        outputs.push_back(operate(logits[l], call_activation(activations[l])));
+    }
+    
+    return {logits, outputs};
+}
 
-//        std::cout << "Weight  " << std::to_string(l) << std::endl;
-//        std::cout << weights[l].size() << std::endl;
-//        std::cout << weights[l][0].size() << std::endl << std::endl;
+// Stochastic Gradient Descent //
+vec3d MLP::SGD(vec3d logits, vec3d outputs, vec1d targets, string loss_func, double learning_rate)
+{
+    vec3d delta_w = {};
+    
+    vec1d error_loss;
+    vec1d predictions = outputs[outputs.size() - 1][0];
+    for (int i = 0; i < outputs[outputs.size() - 1].size(); i++)
+    {
+        error_loss.push_back(squared_error_prime(predictions[i], targets[i]));
     }
 
-//    std::cout << logits.size() << std::endl;
-//    std::cout << logits[0].size() << std::endl << std::endl;
-//
-//    std::vector<double> output = transpose(logits)[0];
+    vec2d error_term;
+    int last = (int)weights.size() - 1;
+    error_term = multiply({error_loss}, weights[last]);
+    error_term = scale(error_term, learning_rate);
+    error_term = multiply(error_term, logits[last]);
+    delta_w.push_back(error_term);
+    
+//    vec2d error = subtract({targets}, outputs[outputs.size() - 1]);
+//    vec2d error_term = multiply(weights[outpturs.size], )
 
-    return logits;
+    for (int l = (int)weights.size() - 2; l >= 0; l--)
+    {
+        error_loss = {};
+        for (int i = 0; i < logits[logits.size() - 1].size(); i++)
+        {
+            error_loss.push_back(sigmoid_prime(logits[l][0][i]));
+        }
+        error_term = multiply({error_loss}, weights[l]);
+        error_term = scale(error_term, learning_rate);
+        error_term = multiply(error_term, logits[l]);
+        delta_w.push_back(error_term);
+    }
+
+//    double delta_w;
+//    double
+//    for (int l = (int)weights.size(); l >= 0; l--)
+//    {
+//        for (int x = 0; x < weights[l].size(); x++)
+//        {
+//            for (int w = 0; w < weights[l][x].size(); w++)
+//            {
+//                delta_w = learning_rate *
+//                weights[l][x][w]
+//            }
+//        }
+//    }
+    
+    return delta_w;
 }
 
 

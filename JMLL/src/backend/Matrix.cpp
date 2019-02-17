@@ -6,6 +6,8 @@
 #include "Matrix.hpp"
 #include "Tools.hpp"
 
+using namespace std;
+
 // Print Matrix
 /**
  * Returns a string representation of a matrix
@@ -13,10 +15,10 @@
  * @param mat The input matrix
  * @return String representation of mat
  */
-std::string printmat(vec2d mat)
+string printmat(vec2d mat)
 {
     // Output string initialized
-    std::string output = "";
+    string output = "";
     
     // Loop parameters
     int y, x;
@@ -24,7 +26,7 @@ std::string printmat(vec2d mat)
     {
         for (x = 0; x < mat[0].size(); x++) // a[0].size() number of columns
         {
-            std::string n = std::to_string(mat[y][x]); // converts double value to string
+            string n = to_string(mat[y][x]); // converts double value to string
             output += n + ", "; // appends number and space to the return string
         }
         output += "\n"; // skip line after a row is finished being iterated
@@ -57,7 +59,7 @@ vec2d matmul(vec2d mat1, vec2d mat2)
     int col = (int) mat2[0].size(); // number of columns in output matrix
     
     // Return matrix
-    vec2d product_mat(row, std::vector<double>(col, 0.0));
+    vec2d product_mat(row, vector<double>(col, 0.0));
     
     // Loop parameters
     double dot;
@@ -91,7 +93,7 @@ vec2d transpose(vec2d mat)
     int row = (int) mat.size();
     int col = (int) mat[0].size();
     
-    vec2d transposed_mat(col, std::vector<double>(row, 0.0));
+    vec2d transposed_mat(col, vector<double>(row, 0.0));
     
     int y, x;
     for (y = 0; y < row; y++)
@@ -118,7 +120,7 @@ vec2d transpose(vec2d mat)
  */
 vec2d random_normal(int rows, int columns, double lowerbound, double upperbound)
 {
-    vec2d mat(rows, std::vector<double>(columns, 0.0));
+    vec2d mat(rows, vector<double>(columns, 0.0));
     
     int y, x;
     for (y = 0; y < rows; y++)
@@ -145,7 +147,7 @@ vec2d add(vec2d a1, vec2d a2)
         row = (int) a1.size();
         col = (int) a1[0].size();
     }
-    vec2d mat(row, std::vector<double>(col, 0.0));
+    vec2d mat(row, vector<double>(col, 0.0));
     
     int y, x;
     for (y = 0; y < row; y++)
@@ -170,7 +172,7 @@ vec2d subtract(vec2d a1, vec2d a2)
         row = (int) a1.size();
         col = (int) a1[0].size();
     }
-    vec2d mat(row, std::vector<double>(col, 0.0));
+    vec2d mat(row, vector<double>(col, 0.0));
     
     int y, x;
     for (y = 0; y < row; y++)
@@ -195,7 +197,7 @@ vec2d multiply(vec2d a1, vec2d a2)
         row = (int) a1.size();
         col = (int) a1[0].size();
     }
-    vec2d mat(row, std::vector<double>(col, 0.0));
+    vec2d mat(row, vector<double>(col, 0.0));
     
     int y, x;
     for (y = 0; y < row; y++)
@@ -207,4 +209,44 @@ vec2d multiply(vec2d a1, vec2d a2)
     }
     
     return mat;
+}
+
+vec2d bump(vec2d a, double n)
+{
+    int row, col;
+    row = (int) a.size();
+    col = (int) a[0].size();
+    
+    int y, x;
+    for (y = 0; y < row; y++)
+    {
+        for (x = 0; x < col; x++)
+        {
+            a[y][x] += n;
+        }
+    }
+    
+    return a;
+}
+vec2d scale(vec2d a, double n)
+{
+    int row, col;
+    row = (int) a.size();
+    col = (int) a[0].size();
+    
+    int y, x;
+    for (y = 0; y < row; y++)
+    {
+        for (x = 0; x < col; x++)
+        {
+            a[y][x] *= n;
+        }
+    }
+    
+    return a;
+}
+
+string get_shape(vec2d mat)
+{
+    return "{" + to_string(mat.size()) + ", " + to_string(mat[0].size()) + "}";
 }
