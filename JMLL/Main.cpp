@@ -82,7 +82,7 @@ void network()
         for (int i = 0; i < input_x.size(); i++)
         {
             tie(logits, outputs) = my_network.forward_prop({input_x[i]});
-//            my_network.SGD(logits, outputs, targets[i], loss, lr);
+            my_network.SGD(logits, outputs, targets[i], loss, lr);
             
             predictions = outputs[outputs.size() -1][0];
             pos = argmax(predictions);
